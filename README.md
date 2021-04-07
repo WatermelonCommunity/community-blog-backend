@@ -23,7 +23,7 @@
     
     Para clonar simplemente deberás copiar la URL del repositorio e ir a tu consola de git, ahí simplemente entraras a una ruta la cual te sea fácil recordar (Por ejemplo el Escritorio) y usaras el siguiente comando:
     
-    ``git clone https://github.com/WatermelonCommunity/community-blog``
+    ``git clone https://github.com/WatermelonCommunity/community-blog-backend``
     
     Cabe aclarar que aún no están las tareas asignadas y de momento no es necesario que clones, pero cuando le estén debes estar muy atento al grupo de discord.
     
