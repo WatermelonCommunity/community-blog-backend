@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 import {Encrypt} from "../Utils/password.encrypt"
 import {jwt} from '../Utils/jwt'
 
-class cUser {
+export class cUser {
     private JWT:jwt;
     constructor(){
         this.JWT = new jwt("24h");
@@ -28,7 +28,28 @@ class cUser {
     }
 
     async register(req:Request,res:Response){
-        
+        let user:user = req.body;
+        if(!user.email || !user.password || !user.name){
+            return res.status(400).json({
+                error: "Todos los campos son obligatorios."
+            })
+        }
+        user.password = await Encrypt.encrypt(user.password);
+
+        const hasUser = model.findOne({email: user.email});
+        if(hasUser){
+            return res.status(400).json({
+                error: "Ya hay un usuario con este email"
+            })
+        }
+
+        const newUser = new model(user);
+        await newUser.save();
+        const token = this.JWT.encode(newUser._id);
+        return res.status(200).json({
+            token
+        })
+
     }
 }
 

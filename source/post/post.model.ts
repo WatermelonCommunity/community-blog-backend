@@ -1,4 +1,4 @@
-import mongoose,{Schema,Document} from 'mongoose'
+import mongoose,{Schema} from 'mongoose'
 import {post} from './post.interface'
 
 const PostShema:Schema = new Schema({
@@ -22,8 +22,7 @@ const PostShema:Schema = new Schema({
         name:{
             type:String,
             required:true
-        },
-        required:true
+        }
     },
     createdAt:{
         type: String,

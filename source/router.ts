@@ -1,4 +1,15 @@
 import {Router} from 'express'
-let router = Router();
+import {cUser} from "./users/user.controller";
+import {PostController} from "./post/Controller";
 
-router.get("/post/test",)
+
+let router = Router();
+const User = new cUser();
+const PostRouter = new PostController();
+
+router.post("/api/login", User.login);
+router.post("/api/register", User.register);
+
+router.get("/api/post",PostRouter.getAll)
+
+export  default  router;

@@ -22,8 +22,8 @@
   "main": "index.js",
   "scripts": {
     "dev:ts": "ts-node source/bin/www.ts",
-    "build": "tsc .",
-    "start": "node dist/bin/www.js"
+    "build": "tsc -p ./",
+    "start": "tsc -p ./ && node dist/bin/www.js"
   },
   "keywords": [],
   "author": "",
