@@ -2,16 +2,15 @@ import model from './user.model';
 import {user} from './user.interface';
 import { Request, Response } from 'express';
 import {Encrypt} from "../Utils/password.encrypt"
-import {jwt} from '../Utils/jwt'
+import jwt from '../Utils/jwt'
+
+const JWT = new jwt("24h")
 
 export class cUser {
-    private JWT:jwt;
-    constructor(){
-        this.JWT = new jwt("24h");
-    }
+
     async login(req:Request,res:Response){
         let info:loginData = req.body;
-        let hasUser = await model.findOne({email : info.email});
+        let hasUser = await model.findOne({email : info.email}).exec();
         if(!hasUser){
             return res.status(403).json({error:"El correo no es correcto"});
         }
@@ -21,7 +20,9 @@ export class cUser {
                 error:"Contraseña incorrecta"
             })
         }
-        let token = await this.JWT.encode(hasUser._id)
+        console.log("Login Success");
+        
+        let token = await JWT.encode(hasUser._id)
         return res.status(200).json({
             token
         })
@@ -36,7 +37,8 @@ export class cUser {
         }
         user.password = await Encrypt.encrypt(user.password);
 
-        const hasUser = model.findOne({email: user.email});
+        const hasUser = await model.findOne({email: user.email}).exec();
+        console.log(hasUser)
         if(hasUser){
             return res.status(400).json({
                 error: "Ya hay un usuario con este email"
@@ -45,7 +47,7 @@ export class cUser {
 
         const newUser = new model(user);
         await newUser.save();
-        const token = this.JWT.encode(newUser._id);
+        const token = await JWT.encode(newUser._id.toString());
         return res.status(200).json({
             token
         })

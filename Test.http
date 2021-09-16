@@ -1,0 +1,24 @@
+POST http://localhost:8080/api/register
+Content-Type: application/json
+
+{
+  "name": "Carlos Nuñez",
+  "email": "test@test.com",
+  "password": "it's a test password"
+}
+
+###
+
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "it's a test password"
+}
+
+###
+
+GET http://localhost:8080/testo
+Content-Type: application/json
+X-TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjYxNDI0ZWQwZDhmNTQ3ZDA5ODZlZmVlYiIsImlhdCI6MTYzMTczNzczNiwiZXhwIjoxNjMxODI0MTM2fQ.Z_fcvx8Sg19eCmV6M6-rV_iBFZg1W1kj0bNPocYSlHE

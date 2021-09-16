@@ -9,4 +9,23 @@ export class PostController{
             posts
         })
     }
+
+    public async createPost(req: Request, res:Response){
+        // @ts-ignore
+        let post:post = req.body;
+        
+        // @ts-ignore
+        post.author = req.isLogged.user;
+        
+        if(!post.title || !post.description){
+            return res.status(400).json({
+                error: "Todos los campos son requeridos"
+            })
+        }
+
+        const postOnDb = new model(post);
+        await postOnDb.save();
+        res.status(200).json(post);
+
+    }
 }
