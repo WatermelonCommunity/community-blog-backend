@@ -7,6 +7,9 @@ export interface user extends Document{
     email:String,
     password: string,
     post: Array<post>,
-    follows: Array<String>,
+    follows: Array<{
+        name: String, 
+        id: String
+    }>,
     photo: String
 }

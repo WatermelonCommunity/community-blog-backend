@@ -10,6 +10,8 @@ export class cUser {
 
     async login(req:Request,res:Response){
         let info:loginData = req.body;
+        console.log(info);
+        
         let hasUser = await model.findOne({email : info.email}).exec();
         if(!hasUser){
             return res.status(403).json({error:"El correo no es correcto"});
@@ -51,6 +53,37 @@ export class cUser {
         return res.status(200).json({
             token
         })
+
+    }
+    async whoiam(req:Request, res:Response){
+        //@ts-ignore
+        const me = await model.findById(req.isLogged.user.id).exec();
+
+        return res.status(200).json({
+            name: me?.name,
+            id: me?.id,
+            photo: me?.photo,
+            email: me?.email,
+            
+        })
+    }
+
+    async follow(req:Request, res:Response){
+        // @ts-ignore
+        const meID = req.isLogged;
+        const me = await model.findById(meID.user.id).exec();
+
+        const {toFollowID} = req.body;
+        if(!toFollowID) return res.status(400).json({
+            error: "Follow User Id does not specified!"
+        });
+        // @ts-ignore
+        const user = await model.findById(me).exec().follows.push({
+            id: toFollowID,
+            // @ts-ignore
+            name: await model.findById(toFollowID).exec().name
+        });
+        model.findByIdAndUpdate(me, user);
 
     }
 }

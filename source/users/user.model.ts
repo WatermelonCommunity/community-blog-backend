@@ -20,7 +20,7 @@ const UserShema:Schema = new Schema({
         type: Array,
     },
     follows:{
-        type: Array
+        type: Array,
     },
     photo:{
         type: String,

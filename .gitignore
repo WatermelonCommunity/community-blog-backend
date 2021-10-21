@@ -1,3 +1,4 @@
 node_modules
 .env
 dist
+wa_site_test

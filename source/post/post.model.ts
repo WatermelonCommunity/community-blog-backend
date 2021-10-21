@@ -26,7 +26,8 @@ const PostShema:Schema = new Schema({
     },
     createdAt:{
         type: String,
-        defult: Date.now()
+        defult: Date.now(),
+        required: true
     },
 })
 
