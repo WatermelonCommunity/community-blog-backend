@@ -22,3 +22,6 @@ Content-Type: application/json
 GET http://localhost:3000/testo
 Content-Type: application/json
 X-TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjYxNDI0ZWQwZDhmNTQ3ZDA5ODZlZmVlYiIsImlhdCI6MTYzMTczNzczNiwiZXhwIjoxNjMxODI0MTM2fQ.Z_fcvx8Sg19eCmV6M6-rV_iBFZg1W1kj0bNPocYSlHE
+
+POST http://localhost:3000/api/users/me
+Content-Type: application/json
